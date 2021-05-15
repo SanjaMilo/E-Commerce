@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'Kerox-NonCommercial';
+    src: local('Kerox-NonCommercial'), url('./fonts/Kerox-NonCommercial.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: local('OpenSans-Light'), url('./fonts/OpenSans-Light.ttf') format('truetype');
+}
+
+a {
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+main {
+    min-height: 70vh;
+}
+
+a:hover, .nav-link:hover {
+    color: #08ffff;
+}
+
+h1 {
+    font-family: 'OpenSans-Light', sans-serif;
+    letter-spacing: 10px;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.navbar-brand {
+    font-family: 'Kerox-NonCommercial', sans-serif; 
+    letter-spacing: 1.55px;
+}
+
+.card-body {
+    font-family: 'OpenSans-Light', sans-serif;
+    padding: 1.75rem 0rem;
+}
+
+.card-title {
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.rating {
+    text-align: center;
+}
+
+.rating span {
+    margin: 0.1rem;
+}
+
+h3 {
+    padding: 1rem 0;
+    text-align: center;
+    font-weight: lighter;
+}
+
+.list-group-item {
+    color: #ffffff;
+    border: 1px solid rgba(249, 249, 249, 0.1) !important;
+}
+  
+
+
