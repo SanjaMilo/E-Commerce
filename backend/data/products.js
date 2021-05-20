@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'iPhone 11 Pro 256GB Memory',
     image: '/images/phone.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Cannon EOS 80D DSLR Camera',
     image: '/images/camera.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Sony Playstation 4 Pro White Version',
     image: '/images/playstation.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Logitech G-Series Gaming Mouse',
     image: '/images/mouse.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/alexa.jpg',
     description:
@@ -78,7 +72,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '7',
     name: 'Beats Solo Pro Wireless Noise Cancelling Headphones',
     image: '/images/headphones.jpg',
     description: 
@@ -91,7 +84,6 @@ const products = [
     numReviews: 15,
   },
   {
-    _id: '8',
     name: 'Magic Keyboard CZ Layout',
     image: '/images/keyboard.jpg',
     description: 
@@ -104,7 +96,6 @@ const products = [
     numReviews: 21,
   },
   {
-    _id: '9',
     name: 'LILY Accent Chair',
     image: '/images/chair.jpg',
     description: 
@@ -117,7 +108,6 @@ const products = [
     numReviews: 17,
   },
   {
-    _id: '10',
     name: '1.1 Millionaires Sunglasses',
     image: '/images/sunglasses.jpg',
     description: 
@@ -130,7 +120,6 @@ const products = [
     numReviews: 13,
   },
   {
-    _id: '11',
     name: 'CONVERSE X HELLO KITTY CHUCK TAYLOR ALL STAR HI',
     image: '/images/shoes.jpg',
     description: 
@@ -143,7 +132,6 @@ const products = [
     numReviews: 18,
   },
   {
-    _id: '12',
     name: 'Omega Speedmaster Moonwatch',
     image: '/images/watch.jpg',
     description: 'Housing made of white ceramics, housing diameter 44.25 mm, dial made of ceramics, white crocodile leather strap with decorative stitching and buckle, automatic movement caliber 9300, Omega Co-axial, Si14-silicon-balance-spiral spring, Chronometer, chronograph, power reserve of approx',
@@ -156,6 +144,6 @@ const products = [
   },
 ]
 
-// export default products; // ES6 modules
+export default products; // ES6 modules
 
-module.exports = products; // CommonJS modules
+// module.exports = products; // CommonJS modules
