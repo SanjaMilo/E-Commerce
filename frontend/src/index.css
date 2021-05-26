@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'OpenSans-Light';
+  src: local('OpenSans-Light'), url('./fonts/OpenSans-Light.ttf') format('truetype');
+}
+
 body {
   margin: 0;
+  font-family: 'OpenSans-Light', sans-serif;
 }
 
 * {

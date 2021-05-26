@@ -36,7 +36,8 @@ a:hover, .nav-link:hover, .nav-link:focus {
 
 .navbar-brand {
     font-family: 'Kerox-NonCommercial', sans-serif; 
-    letter-spacing: 1.55px;
+    letter-spacing: 2.55px;
+    text-shadow: 1px 5px 3px #39255a;
 }
 
 .zoom {
@@ -84,6 +85,10 @@ h3 {
     font-weight: lighter;
 }
 
+.h3-title {
+    letter-spacing: 5px;
+}
+
 .price {
     text-shadow: 1px 8px 5px #39255a;
 }
@@ -96,8 +101,14 @@ h3 {
     letter-spacing: 3px;
 }
 
+.list-group {
+    border-radius: 0 !important;
+    backdrop-filter: none;
+}
+
 .list-group-item {
     color: #ffffff;
+    border-radius: 0 !important;
     border: 1px solid rgba(249, 249, 249, 0.1) !important;
 }
 
@@ -138,12 +149,39 @@ h3 {
     background-color: #e51b75;
 }
 
+.form-control {
+    -webkit-appearance: menulist;
+}
+
 .go-back {
     text-decoration: underline;
 }
 
-.form-control {
-    -webkit-appearance: menulist;
+.sign-in-title {
+    text-align: center;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    letter-spacing: 7px;
+}
+
+.submit-btn {
+    display: block;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.colored-text, .colored-text-link {
+    color: #08ffff;
+}
+
+.enlarged-text {
+    font-size: 1.3rem;
+}
+
+.table-sm>:not(caption)>*>* {
+    padding: .25rem .65rem;
 }
 
 

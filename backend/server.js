@@ -10,6 +10,8 @@ import colors from 'colors';
 import connectDB from './config/db.js';
 // import products from './data/products.js'; 
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -18,12 +20,19 @@ connectDB();
 
 const app = express();
 
+app.use(express.json()); // (body parser) this will allow us to accept json data in body, req.body to parse
+
 app.get('/', (req, res) => {
     res.send('API is running...')
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
+//  PAYPAL LINK: https://developer.paypal.com/developer/applications
+// <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
 // these 2 routes are placed into the file productRoutes.js in folder routes
 // app.get('/api/products', (req, res) => {

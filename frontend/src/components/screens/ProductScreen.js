@@ -100,7 +100,7 @@ const ProductScreen = ({ history, match }) => {
                             </ListGroup.Item>
                         )}
                         <ListGroup.Item>
-                           <Button variant="success" onClick={addToCartHandler} style={{width: "100%"}} type="button" disabled={ product.countInStock === 0 }>Add To Cart</Button>
+                           <Button variant="info" onClick={addToCartHandler} style={{width: "100%"}} type="button" disabled={ product.countInStock === 0 }>Add To Cart</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>

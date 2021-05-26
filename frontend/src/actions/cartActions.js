@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../actionTypes/cartActionTypes';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../actionTypes/cartActionTypes';
 
 export const addToCartAction = (id, qty) => async (dispatch, getState) => {
     // we are going to save the cart in localStorage, so we pass the second argument getState. getState() allows us to get the entire state tree and we are going to use it to get the whole cart, like so: getState().cart.cartItems
@@ -22,6 +22,7 @@ export const addToCartAction = (id, qty) => async (dispatch, getState) => {
 
 };
 
+
 export const removeFromCartAction = (id) => (dispatch, getState) => {
     dispatch({
         type: CART_REMOVE_ITEM,
@@ -29,4 +30,24 @@ export const removeFromCartAction = (id) => (dispatch, getState) => {
     });
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+
+export const saveShippingAddressAction = (data) => (dispatch, getState) => {
+    dispatch({
+        type: CART_SAVE_SHIPPING_ADDRESS,
+        payload: data
+    });
+
+    localStorage.setItem('shippingAddress', JSON.stringify(data));
+};
+
+
+export const savePaymentMethodAction = (data) => (dispatch, getState) => {
+    dispatch({
+        type: CART_SAVE_PAYMENT_METHOD,
+        payload: data
+    });
+
+    localStorage.setItem('paymentMethod', JSON.stringify(data));
 };
