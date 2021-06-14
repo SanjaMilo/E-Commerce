@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../Message';
 import Loader from '../Loader';
-import { login } from '../../actions/userActions';
+import { loginAction } from '../../actions/userActions';
 import FormContainer from '../FormContainer';
 
 const LoginScreen = ({ location, history }) => {
@@ -28,7 +28,7 @@ const LoginScreen = ({ location, history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password))
+        dispatch(loginAction(email, password))
     };
 
     return(

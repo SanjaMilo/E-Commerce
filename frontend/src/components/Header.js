@@ -2,7 +2,7 @@ import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../actions/userActions';
+import { logoutAction } from '../actions/userActions';
 
 const Header = () => {
 
@@ -12,7 +12,7 @@ const Header = () => {
 	const { userInfo } = userLogin; // destructuring userLogin (see in the userReducer)
 
 	const logoutHandler = () => {
-		dispatch(logout());
+		dispatch(logoutAction());
 	};
 
 	return (

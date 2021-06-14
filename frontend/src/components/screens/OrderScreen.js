@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button, ListGroup, Image, Card } from 'react-bootstrap';
+import { Row, Col, Button, ListGroup, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../Message';
 import Loader from '../Loader';
-import { getOrderDetailsAction, payOrderAction } from '../../actions/orderActions';
-import { ORDER_PAY_RESET } from '../../actionTypes/orderActionTypes';
+import { getOrderDetailsAction, payOrderAction, deliverOrderAction } from '../../actions/orderActions';
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../../actionTypes/orderActionTypes';
  
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
 
     const orderId = match.params.id;
 
@@ -24,6 +24,12 @@ const OrderScreen = ({ match }) => {
     const orderPay = useSelector((state) => state.orderPay);
     const { loading: loadingPay, success: successPay } = orderPay;
 
+    const orderDeliver = useSelector((state) => state.orderDeliver);
+    const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
     const addDecimals = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2);
     };
@@ -35,6 +41,10 @@ const OrderScreen = ({ match }) => {
     };
 
     useEffect( () => {
+        if(!userInfo) {
+            history.push('/login');
+        };
+
         // build PayPal script here, when component loads:
         const addPayPalScript = async () => {
             // fetch the Client ID from backend:
@@ -49,8 +59,9 @@ const OrderScreen = ({ match }) => {
             document.body.appendChild(script)
         };
 
-        if (!order || successPay) {
+        if (!order || successPay || successDeliver) {
             dispatch({ type: ORDER_PAY_RESET }); // to reset the state not to get in loop, after pay to keep refreshing 
+            dispatch({ type: ORDER_DELIVER_RESET })
             // We want to see the order even if we have no success pay. If the order is not there, dispatch 
             dispatch(getOrderDetailsAction(orderId)); 
         } else if (!order.isPaid) {
@@ -61,14 +72,17 @@ const OrderScreen = ({ match }) => {
             }
         };
        
-    }, [dispatch, orderId, order, successPay]);
+    }, [dispatch, orderId, order, successPay, successDeliver]);
 
     const successPaymentHandler = (paymentResult) => {
         // takes from PayPal the paymentResult 
         console.log(paymentResult);
         dispatch(payOrderAction(orderId, paymentResult))
+    };
 
-    }
+    const deliverHandler = () => {
+        dispatch(deliverOrderAction(order));
+    };
 
 
     return(
@@ -166,6 +180,12 @@ const OrderScreen = ({ match }) => {
                                 {!sdkReady ? <Loader /> : (
                                     <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} ></PayPalButton>
                                 )}
+                            </ListGroup.Item>
+                        )}
+                        {loadingDeliver && <Loader />}
+                        {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                            <ListGroup.Item>
+                                <Button type="button" style={{'width': '100%'}} variant="warning" class="btn" onClick={deliverHandler}>Mark As Delivered</Button>
                             </ListGroup.Item>
                         )}
                     </ListGroup>

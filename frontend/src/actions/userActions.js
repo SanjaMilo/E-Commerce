@@ -1,8 +1,8 @@
-import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_DETAILS_RESET, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LIST_FAIL } from "../actionTypes/userActionTypes";
+import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_DETAILS_RESET, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LIST_FAIL, USER_LIST_RESET, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL } from "../actionTypes/userActionTypes";
 import { ORDER_LIST_MY_RESET } from '../actionTypes/orderActionTypes';
 import axios from 'axios';
 
-export const login = (email, password) => async (dispatch) => {
+export const loginAction = (email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_LOGIN_REQUEST
@@ -33,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
 }; 
 
 
-export const logout = () => (dispatch) => {
+export const logoutAction = () => (dispatch) => {
 
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
@@ -47,15 +47,19 @@ export const logout = () => (dispatch) => {
         type: USER_DETAILS_RESET
     });
     dispatch({
+        type: USER_LIST_RESET
+    });
+    dispatch({
         type: ORDER_LIST_MY_RESET
     });
 
+    // SIGN OUT (logout) redirects to the Sign In Screen:
     document.location.href = '/login';
     
 };
 
 
-export const register = (name, email, password) => async (dispatch) => {
+export const registerAction = (name, email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -91,7 +95,7 @@ export const register = (name, email, password) => async (dispatch) => {
 };
 
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetailsAction = (id) => async (dispatch, getState) => {
     // we can get user info from getState() which has the token, that we need to pass in (send)
     try {
         dispatch({
@@ -125,7 +129,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 };
 
 
-export const updateUserProfile = (user) => async (dispatch, getState) => {
+export const updateUserProfileAction = (user) => async (dispatch, getState) => {
     // we can get user info from getState() which has the token, that we need to pass in (send)
     try {
         dispatch({
@@ -185,6 +189,77 @@ export const listUsersAction = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: USER_LIST_FAIL,
+            payload: 
+            error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    };
+};
+
+
+export const deleteUserAction = (id) => async (dispatch, getState) => {
+    // we can get user info from getState() which has the token, that we need to pass in (send)
+    try {
+        dispatch({
+            type: USER_DELETE_REQUEST
+        });
+
+        const { userLogin: { userInfo }} = getState(); // two levels destructuring getState() -> getState().userLogin.userInfo ... we want userInfo for the token
+
+        // here we want to pass token
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            }
+        };
+
+        await axios.delete(`/api/users/${id}`, config);
+
+        dispatch({
+            type: USER_DELETE_SUCCESS
+            // no need to send a payload
+        });
+
+    } catch (error) {
+        dispatch({
+            type: USER_DELETE_FAIL,
+            payload: 
+            error.response && error.response.data.message ? error.response.data.message : error.message
+        });
+    };
+};
+
+
+export const updateUserAction = (user) => async (dispatch, getState) => {
+    // we can get user info from getState() which has the token, that we need to pass in (send)
+    try {
+        dispatch({
+            type: USER_UPDATE_REQUEST
+        });
+
+        const { userLogin: { userInfo }} = getState(); // two levels destructuring getState() -> getState().userLogin.userInfo ... we want userInfo for the token
+
+        // here we want to pass token
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            }
+        };
+
+        const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+
+        dispatch({
+            type: USER_UPDATE_SUCCESS
+        });
+        // and the payload:
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: data
+        });
+
+    } catch (error) {
+        dispatch({
+            type: USER_UPDATE_FAIL,
             payload: 
             error.response && error.response.data.message ? error.response.data.message : error.message
         });

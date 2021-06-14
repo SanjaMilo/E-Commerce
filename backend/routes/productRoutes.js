@@ -43,12 +43,13 @@
 // The above is changed by creating the controllers/productController, and now it is like these below: 
 
 import express from 'express';
-import { getProducts, getProductById } from '../controllers/productController.js';
+import { getProducts, getProductById, deleteProduct, createProduct, updateProduct } from '../controllers/productController.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 // hook on: /api/products
-router.route('/').get(getProducts);
-router.route('/:id').get(getProductById);
+router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct);
 
 export default router;

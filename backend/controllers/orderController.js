@@ -86,6 +86,29 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 });
 
 
+// @desc  Update order to Delivered (Up for Delivery)
+// @route  GET /api/orders/:id/deliver
+// @access Private/Admin
+const updateOrderToDelivered = asyncHandler(async (req, res) => {
+    // get the id from the URL (req.params.id). In addition to the order information, we want the user's name and email that is associated with this order -> .populate('user', 'name email')
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+        order.isDelivered = true; // set it to true, by default is false
+        order.deliveredAt = Date.now(); // set time of the delivery  
+        // now save those properties of the order, in a variable in the database:
+        const updatedOrder = await order.save();
+        // send back the updatedOrder
+        res.json(updatedOrder);
+
+    } else {
+        res.status(404);
+        throw new Error("Order not found");
+    }
+   
+});
+
+
 // @desc  Get logged in user orders (my orders, on profile screen)
 // @route  GET /api/orders/myorders
 // @access Private
@@ -96,5 +119,15 @@ const getMyOrders = asyncHandler(async (req, res) => {
 });
 
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+// @desc  Get all orders
+// @route  GET /api/orders
+// @access Private/Admin
+const getOrders = asyncHandler(async (req, res) => {
+    // find orders where the user is the logged in user 
+    const orders = await Order.find({}).populate('user', 'id name');
+    res.json(orders);
+});
+
+
+export { addOrderItems, getOrderById, updateOrderToPaid, updateOrderToDelivered, getMyOrders, getOrders };
 
