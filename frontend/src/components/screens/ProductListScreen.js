@@ -4,15 +4,17 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../Message';
 import Loader from '../Loader';
+import Paginate from '../Paginate';
 import { listProductsAction, deleteProductAction, createProductAction } from '../../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../../actionTypes/productActionTypes';
 
 const ProductListScreen = ({ history, match }) => {
+    const pageNumber = match.params.pageNumber || 1;
 
     const dispatch = useDispatch();
 
     const productList = useSelector((state) => state.productList);
-    const { loading, products, error } = productList;
+    const { loading, error, products, page, pages } = productList;
 
     const productDelete = useSelector((state) => state.productDelete);
     const { loading: loadingDelete, success: successDelete, error: errorDelete } = productDelete; // renaming
@@ -36,10 +38,12 @@ const ProductListScreen = ({ history, match }) => {
             // if it is created, we want to redirect to Product Edit screen
             history.push(`/admin/product/${createdProduct._id}/edit`);
         } else {
-            dispatch(listProductsAction())
+            // dispatch(listProductsAction()); 
+            // after adding pagination: 
+            dispatch(listProductsAction('', pageNumber)); // the empty string is for the keyword (first position), and since it is an Admin screen, we don't want a keyword here
         }
 
-    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct, pageNumber]);
 
     const createProductHandler = () => {
         dispatch(createProductAction());
@@ -66,6 +70,7 @@ const ProductListScreen = ({ history, match }) => {
             {(loadingCreate || loadingDelete) && <Loader />}
             {errorCreate && <Message variant="warning">{errorCreate}</Message>}
             {loading ? <Loader /> : error ? <Message variant="warning">{error}</Message> : (
+                <>
                 <Table striped bordered hover responsive className="table-sm">
                     <thead>
                         <tr>
@@ -104,6 +109,8 @@ const ProductListScreen = ({ history, match }) => {
                         ))}
                     </tbody>
                 </Table>
+                <Paginate pages={pages} page={page} isAdmin={true} />
+                </>
             )}
         </>
     )

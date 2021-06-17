@@ -59,7 +59,7 @@ const OrderScreen = ({ match, history }) => {
             document.body.appendChild(script)
         };
 
-        if (!order || successPay || successDeliver) {
+        if (!order || successPay || successDeliver || order._id !== orderId) {
             dispatch({ type: ORDER_PAY_RESET }); // to reset the state not to get in loop, after pay to keep refreshing 
             dispatch({ type: ORDER_DELIVER_RESET })
             // We want to see the order even if we have no success pay. If the order is not there, dispatch 

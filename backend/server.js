@@ -15,13 +15,18 @@ import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import path from 'path'; // path is a node.js module to work with file paths
-
+import morgan from 'morgan';
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+
+// morgan (run it only in development mode)
+if(process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+};
 
 app.use(express.json()); // (body parser) this will allow us to accept json data in body, req.body to parse
 
@@ -68,7 +73,6 @@ app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_I
 
 
 // IMPORTANT! This app.use('/uploads' ....) must be defined before app.use(notFound) and app.use(errorHandler) ! 
-
 // to make the folder uploads (from frontend) accessible by default, so we need to make it a static folder so that it can be loaded in the browser
 // path.join -> join different segments of files
 // __dirname will point to the current directory, and this will not be available if we use ES6 modules, but only if we use commonJS modules ('require' syntax), but we can mimic that with path.resolve()

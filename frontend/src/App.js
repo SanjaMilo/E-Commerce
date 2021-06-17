@@ -27,6 +27,10 @@ function App() {
         <Container>
           <Switch>
             <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/search/:keyword" component={HomeScreen} />
+            <Route path="/page/:pageNumber" component={HomeScreen} />
+            {/* if we have more results per page for the search and we want pagination there, add this route too */}
+            <Route path="/search/:keyword/page/:pageNumber" component={HomeScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
             <Route path="/payment" component={PaymentScreen} />
@@ -38,7 +42,8 @@ function App() {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/admin/userlist" component={UserListScreen} />
             <Route path="/admin/user/:id/edit" component={UserEditScreen} />
-            <Route path="/admin/productlist" component={ProductListScreen} />
+            <Route exact path="/admin/productlist" component={ProductListScreen} />
+            <Route exact path="/admin/productlist/:pageNumber" component={ProductListScreen} />
             <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
             <Route path="/admin/orderlist" component={OrderListScreen} />
           </Switch>
