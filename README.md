@@ -4,6 +4,10 @@
 You can see Top reviewed products, list through the list of products, see product details, add to cart, write reviews for products, pay with PayPal, create an account, sign in, log out. Also there is a user and admin role.
 
 Styling is with Bootswatch theme Quartz https://bootswatch.com/quartz/
+
+Database: MongoDB (Atlas & Compass)
+
+Node.js -> Express
  
  PAYPAL LINK: https://developer.paypal.com/developer/applications
 
