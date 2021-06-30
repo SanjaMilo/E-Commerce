@@ -10,7 +10,7 @@ import { USER_UPDATE_RESET } from '../../actionTypes/userActionTypes';
 
 const UserEditScreen = ({ match, history }) => {
     const userId = match.params.id; // user id from the URL
-    // State for the form input fields for name, email, password and confirm password
+    // State for the form input fields: name, email, password and confirm password
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [isAdmin, setIsAdmin] = useState(false); // false by default
@@ -18,7 +18,7 @@ const UserEditScreen = ({ match, history }) => {
     const dispatch = useDispatch();
 
     const userDetails = useSelector((state) => state.userDetails);
-    const { loading, error, user } = userDetails; // destructuring userDetails (see in the userReducer, we have: loading, user and error)
+    const { loading, error, user } = userDetails; // destructuring userDetails 
 
     const userUpdate = useSelector((state) => state.userUpdate);
     const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate; // destructuring userUpdate and renaming loading, error and success
@@ -31,10 +31,10 @@ const UserEditScreen = ({ match, history }) => {
         } else {
             // userId is coming from the URL route
             if (!user.name || user._id !== userId) {
-                // we want to fetch the user
+                // fetch the user
                 dispatch(getUserDetailsAction(userId));
             } else {
-                // if the user is already here, we want to show it in the fields
+                // if the user is already here, show it in the fields
                 setName(user.name);
                 setEmail(user.email);
                 setIsAdmin(user.isAdmin)

@@ -6,7 +6,7 @@ import { savePaymentMethodAction } from '../../actions/cartActions';
 import CheckoutSteps from '../CheckoutSteps';
 
 const PaymentScreen = ({ history }) => {
-    // We want to redirect if there is no shipping address
+    // redirect if there is no shipping address
     const cart = useSelector((state) => state.cart);
     const { shippingAddress } = cart; // destructuring cart, and pulling shippingAddress from it.
 

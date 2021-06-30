@@ -56,7 +56,5 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(...middleware))
 );
 
-// PAYPAL LINK: https://developer.paypal.com/developer/applications
-
 export default store;
 

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap';
 import Rating from '../Rating';
-// import axios from 'axios';
-// import products from '../../products';
 import { detailsProductAction, createProductReviewAction } from '../../actions/productActions';
 import Loader from '../Loader';
 import Message from '../Message';
@@ -13,11 +11,6 @@ import Meta from '../Meta';
 
 
 const ProductScreen = ({ history, match }) => {
-    // const product = products.find(p => p._id === match.params.id); // with axios.get we don't need this 
-
-    // const [product, setProduct] = useState({}); // with redux we don't need this
-
-     // component level state: (qty = quantity)
     const [qty, setQty] = useState(1); // initial state for quantity is 1 (0 makes no sense, empty cart)
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -34,14 +27,6 @@ const ProductScreen = ({ history, match }) => {
     const { success: successProductReview, error: errorProductReview } = productCreateReview;
 
     useEffect( () => {
-        // const fetchProduct = async () => {
-        //     // const res = await axios.get('/api/products'); // destructuring res -> (res.data)
-        //     const { data } = await axios.get(`/api/products/${match.params.id}`) 
-        //     setProduct(data);
-        // };
-        // // invoke 
-        // fetchProduct();
-
         if(successProductReview) {
             alert('Review Submitted!');
             // set back to the default values
@@ -53,7 +38,8 @@ const ProductScreen = ({ history, match }) => {
         // with redux:
         dispatch(detailsProductAction(match.params.id))
 
-    }, [dispatch, match, successProductReview]); // add [dispatch, match] -> to remove warning for missing dependency
+    }, [dispatch, match, successProductReview]); 
+    
 
     const addToCartHandler = () => {
         history.push(`/cart/${match.params.id}?qty=${qty}`)

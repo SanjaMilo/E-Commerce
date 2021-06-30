@@ -12,7 +12,7 @@ import axios from 'axios';
 
 const ProductEditScreen = ({ match, history }) => {
     const productId = match.params.id; // product id from the URL
-    // State for the form input fields for name, email, password and confirm password
+    // State for the form input fields: name, email, password and confirm password
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
     const [image, setImage] = useState("");
@@ -25,7 +25,7 @@ const ProductEditScreen = ({ match, history }) => {
     const dispatch = useDispatch();
 
     const productDetails = useSelector((state) => state.productDetails);
-    const { loading, error, product } = productDetails; // destructuring productDetails (see in the productReducer, we have: loading, product and error)
+    const { loading, error, product } = productDetails; // destructuring productDetails
 
     const productUpdate = useSelector((state) => state.productUpdate);
     const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate; // destructuring productUpdate and renaming loading, error and success
@@ -54,7 +54,7 @@ const ProductEditScreen = ({ match, history }) => {
        
     }, [dispatch, history, productId, product, successUpdate]);
 
-    // we are sending http request, so this is going to be async func
+    // sending http request, so this is async func
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
         // initialize formData object

@@ -2,8 +2,7 @@ import User from '../models/userModel.js';
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 
-// These request handlers are known as called “controllers”. I prefer calling them request handlers because request handlers are more explicit.
-
+//  “controllers” -> are request handlers 
 
 // @desc  Auth user & get token
 // @route  POST /api/users/login

@@ -8,7 +8,7 @@ import { getUserDetailsAction, updateUserProfileAction } from '../../actions/use
 import { listMyOrdersAction } from '../../actions/orderActions';
 
 const ProfileScreen = ({ location, history }) => {
-    // State for the form input fields for name, email, password and confirm password
+    // State for the form input fields: name, email, password and confirm password
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,18 +18,18 @@ const ProfileScreen = ({ location, history }) => {
     const dispatch = useDispatch();
 
     const userDetails = useSelector((state) => state.userDetails);
-    const { loading, error, user } = userDetails; // destructuring userDetails (see in the userReducer, we have: loading, userInfo and error)
+    const { loading, error, user } = userDetails; // destructuring userDetails
 
     const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo } = userLogin; // destructuring userLogin (see in the userReducer, we have: loading, userInfo and error)
+    const { userInfo } = userLogin; // destructuring userLogin 
 
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-    const { success } = userUpdateProfile; // destructuring userUpdateProfile (see in the userUpdateProfile Reducer, we want the success value)
+    const { success } = userUpdateProfile; // destructuring userUpdateProfile 
 
     const orderListMy = useSelector((state) => state.orderListMy);
     const { loading: loadingOrders, error: errorOrders, orders } = orderListMy; 
 
-    // We want to redirect if we are already registered
+    // Redirect if already registered
     useEffect( () => {
         //check if no userInfo 
         if (!userInfo) {
@@ -41,10 +41,10 @@ const ProfileScreen = ({ location, history }) => {
             } else {
                 setName(user.name);
                 setEmail(user.email);
-                // we don't want to fill the password fields
+                // don't fill the password fields
             }
         }
-    }, [dispatch, history, userInfo, user]); // this will fire off when user changes, dispatch, history and userInfo
+    }, [dispatch, history, userInfo, user]); 
 
     const submitHandler = (e) => {
         e.preventDefault();

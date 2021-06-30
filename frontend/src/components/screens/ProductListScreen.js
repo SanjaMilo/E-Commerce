@@ -31,16 +31,17 @@ const ProductListScreen = ({ history, match }) => {
         });
 
         if (!userInfo.isAdmin) {
-            history.push('/login'); // but, if the user (that is admin)  was already logged in, it redirects to "/"
+            history.push('/login'); 
+            // but, if the user (that is admin) was already logged in, it redirects to "/"
         };
 
         if (successCreate) {
-            // if it is created, we want to redirect to Product Edit screen
+            // if it is created, redirect to Product Edit screen
             history.push(`/admin/product/${createdProduct._id}/edit`);
         } else {
-            // dispatch(listProductsAction()); 
             // after adding pagination: 
-            dispatch(listProductsAction('', pageNumber)); // the empty string is for the keyword (first position), and since it is an Admin screen, we don't want a keyword here
+            dispatch(listProductsAction('', pageNumber)); 
+            // the empty string is for the keyword (first position), and since it is an Admin screen, we don't want a keyword here
         }
 
     }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct, pageNumber]);

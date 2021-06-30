@@ -8,17 +8,17 @@ import { loginAction } from '../../actions/userActions';
 import FormContainer from '../FormContainer';
 
 const LoginScreen = ({ location, history }) => {
-    // State for the form input fields for email and password
+    // State for the form input fields: email and password
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
 
     const userLogin = useSelector((state) => state.userLogin);
-    const { loading, error, userInfo } = userLogin; // destructuring userLogin (see in the userReducer, we have: loading, userInfo and error)
+    const { loading, error, userInfo } = userLogin; // destructuring userLogin
 
     const redirect = location.search ? location.search.split("=")[1] : '/';
-    // We want to redirect if we are already logged in
+    // redirect if already logged in
     useEffect( () => {
         // if the user is not logged in, userInfo is going to be null, not exist, so we will check, if it exists:
         if (userInfo) {

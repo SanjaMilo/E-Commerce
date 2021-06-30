@@ -48,7 +48,7 @@ export const getOrderDetailsAction = (id) => async (dispatch, getState) => {
         // here we want to pass token
         const config = {
             headers: {
-                // it's a GET req, we don't need to have 'Content-Type'
+                // it's a GET req, so don't need to have 'Content-Type'
                 Authorization: `Bearer ${userInfo.token}`,
             }
         };

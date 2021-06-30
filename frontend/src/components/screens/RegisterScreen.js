@@ -8,7 +8,7 @@ import { registerAction } from '../../actions/userActions';
 import FormContainer from '../FormContainer';
 
 const RegisterScreen = ({ location, history }) => {
-    // State for the form input fields for name, email, password and confirm password
+    // State for the form input fields: name, email, password and confirm password
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,13 +18,13 @@ const RegisterScreen = ({ location, history }) => {
     const dispatch = useDispatch();
 
     const userRegister = useSelector((state) => state.userRegister);
-    const { loading, error, userInfo } = userRegister; // destructuring userRegister (see in the userReducer, we have: loading, userInfo and error)
+    const { loading, error, userInfo } = userRegister; // destructuring userRegister 
 
     const redirect = location.search ? location.search.split("=")[1] : '/';
 
-    // We want to redirect if we are already registered
+    // Redirect if already registered
     useEffect( () => {
-        // if the user is not registered in, userInfo is going to be null, not exist, so we will check, if it exists:
+        // if the user is not registered, userInfo is going to be null, not exist, so we will check, if it exists:
         if (userInfo) {
             history.push(redirect);
         };

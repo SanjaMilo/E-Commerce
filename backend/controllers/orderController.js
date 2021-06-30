@@ -1,8 +1,7 @@
 import Order from '../models/orderModel.js';
 import asyncHandler from 'express-async-handler';
 
-// These request handlers are known as called “controllers”. I prefer calling them request handlers because request handlers are more explicit.
-
+//  “controllers” -> are request handlers 
 
 // @desc  Create new order
 // @route  POST /api/orders

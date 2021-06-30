@@ -29,7 +29,6 @@ function App() {
             <Route exact path="/" component={HomeScreen} />
             <Route exact path="/search/:keyword" component={HomeScreen} />
             <Route path="/page/:pageNumber" component={HomeScreen} />
-            {/* if we have more results per page for the search and we want pagination there, add this route too */}
             <Route path="/search/:keyword/page/:pageNumber" component={HomeScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
@@ -52,6 +51,6 @@ function App() {
       <Footer />
     </Router>
   );
-}
+};
 
 export default App;

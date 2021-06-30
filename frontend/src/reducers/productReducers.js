@@ -5,8 +5,6 @@ export const productListReducer = (state = { products: [] }, action) => {
         case PRODUCT_LIST_REQUEST:
             return { loading: true, products: [] }
         case PRODUCT_LIST_SUCCESS:
-            // return { loading: false, products: action.payload }
-            // after pagination the payload of products will be payload.products and add page and pages:
             return { loading: false, products: action.payload.products, page: action.payload.page, pages: action.payload.pages }
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload }

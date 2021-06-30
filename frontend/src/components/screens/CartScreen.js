@@ -54,7 +54,6 @@ const CartScreen = ({ match, location, history }) => {
                                 <Col md={2}> ${item.price}</Col>
                                 <Col md={2}>
                                     <Form.Control className="select" as="select" value={item.qty} onChange={(e) => dispatch(addToCartAction(item.product, Number(e.target.value)))}>
-                                                {/* if the number of countInStock is 5, we want an array of [0,1,2,3,4] */}
                                                 {
                                                 [...Array(item.countInStock).keys()].map(el => (<option key={el + 1} value={el + 1}>{el + 1}</option>))
                                                 }

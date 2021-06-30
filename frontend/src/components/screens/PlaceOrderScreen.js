@@ -23,7 +23,7 @@ const PlaceOrderScreen = ({ history }) => {
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2);
 
     const orderCreate = useSelector((state) => state.orderCreate);
-    const { order, success, error } = orderCreate; // destructuring orderCreate (see orderCreateReducer)
+    const { order, success, error } = orderCreate; // destructuring orderCreate 
 
     useEffect( () => {
         if (success) {

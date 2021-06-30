@@ -29,7 +29,7 @@ const Rating = ({ value, text, color }) => {
 Rating.defaultProps = {
     color: "#474cb1"
 }
-//  npm i prop-types 
+
 Rating.propTypes = {
     value: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,

@@ -5,9 +5,8 @@ import axios from 'axios';
 export const listProductsAction = (keyword = '', pageNumber = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST });
-        // destructuring axios response like this: { data } which equals to res.data
         // add query strings to `/api/products` -> (? query strings) if we have two or more query strings, separate them with &
-        const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`); // after adding pagination functionality, this data now will have in addition to products, also: page and pages. And the products will be as-> payload: data.products
+        const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`); // after adding pagination functionality, this data now will, in addition to products, also have: page and pages. And the products will be as-> payload: data.products
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,

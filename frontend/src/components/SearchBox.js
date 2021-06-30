@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 const SearchBox = ({ history }) => {
-    // since the search form is embedded into the Header and it's not going to have direct access to the props (and props.history), we are going to use render prop
+    // since the search form is embedded into the Header and it's not going to have direct access to the props (and props.history), we are going to use render props in the Header.js
 
     const [keyword, setKeyword] = useState('');
 

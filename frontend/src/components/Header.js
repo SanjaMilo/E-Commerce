@@ -11,7 +11,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 
 	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin; // destructuring userLogin (see in the userReducer)
+	const { userInfo } = userLogin; // destructuring userLogin 
 
 	const logoutHandler = () => {
 		dispatch(logoutAction());
@@ -26,7 +26,7 @@ const Header = () => {
 				</LinkContainer>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Route render={(props) => <SearchBox {...props} />} />
-					{/* <Route render ={({ history }) => <SearchBox history={history} />} /> */}
+					{/* or using destructuring like so: <Route render ={({ history }) => <SearchBox history={history} />} /> */}
 				<Navbar.Collapse id="basic-navbar-nav" style={{flexGrow: "0"}}>
 					<Nav className="mr-auto">
 						<LinkContainer to="/cart">

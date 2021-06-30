@@ -1,15 +1,14 @@
 import Product from '../models/productModel.js';
 import asyncHandler from 'express-async-handler';
 
-// These request handlers are known as called “controllers”. I prefer calling them request handlers because request handlers are more explicit.
-
+//  “controllers” -> are request handlers 
 
 // @desc  Fetch all products
 // @route  GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
     // pagination
-    const pageSize = 4; // set the number of products per page
+    const pageSize = 8; // set the number of products per page
     const page = Number(req.query.pageNumber) || 1;  // set the current page -> what page in the query is. Or 1, if that is not there, it will always be page 1 
 
     // req.query -> we can get query strings from url (whatever is after the ? question mark) 

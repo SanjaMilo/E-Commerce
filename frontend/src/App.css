@@ -25,6 +25,10 @@ a:hover, .nav-link:hover, .nav-link:focus {
     color: #08ffff;
 }
 
+.dropdown-menu a, .dropdown-menu a:hover {
+    color: cyan;
+}
+
 .h1-title {
     font-family: 'Kerox-NonCommercial', sans-serif; 
     letter-spacing: 15px;

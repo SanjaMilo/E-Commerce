@@ -24,8 +24,8 @@ const UserListScreen = ({ history }) => {
             dispatch(listUsersAction());
         } else {
             history.push('/login'); // if the user was already logged in, it redirects to "/"
-        } 
-        // success delete (true) we pass in as a dependency
+        };
+      
     }, [dispatch, history, userInfo, successDelete]);
 
     const deleteHandler = (id) => {

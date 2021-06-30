@@ -19,7 +19,7 @@ const OrderScreen = ({ match, history }) => {
     const dispatch = useDispatch();
 
     const orderDetails = useSelector((state) => state.orderDetails);
-    const { order, loading, error } = orderDetails; // destructuring orderDetails (see getOrderDetailsReducer)
+    const { order, loading, error } = orderDetails; // destructuring orderDetails 
 
     const orderPay = useSelector((state) => state.orderPay);
     const { loading: loadingPay, success: successPay } = orderPay;
@@ -60,13 +60,13 @@ const OrderScreen = ({ match, history }) => {
         };
 
         if (!order || successPay || successDeliver || order._id !== orderId) {
-            dispatch({ type: ORDER_PAY_RESET }); // to reset the state not to get in loop, after pay to keep refreshing 
+            dispatch({ type: ORDER_PAY_RESET }); // to reset the state, not get in loop, after pay (do not keep refreshing)
             dispatch({ type: ORDER_DELIVER_RESET })
-            // We want to see the order even if we have no success pay. If the order is not there, dispatch 
+            // show order even if no success pay. If the order is not there, dispatch 
             dispatch(getOrderDetailsAction(orderId)); 
         } else if (!order.isPaid) {
             if (!window.paypal) {
-                addPayPalScript(); // invoke 
+                addPayPalScript(); 
             } else {
                 setSdkReady(true);
             }

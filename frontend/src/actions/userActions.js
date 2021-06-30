@@ -7,7 +7,7 @@ export const loginAction = (email, password) => async (dispatch) => {
         dispatch({
             type: USER_LOGIN_REQUEST
         });
-        // when we are sending data, we want to send in the headers, a content type of application/json, and pass in the token for protected routes authorization
+        // when sending data, send in the headers a content type of application/json, and pass in the token for protected routes authorization
         const config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ export const registerAction = (name, email, password) => async (dispatch) => {
         dispatch({
             type: USER_REGISTER_REQUEST
         });
-        // when we are sending data, we want to send in the headers, a content type of application/json, and pass in the token for protected routes authorization
+        // when sending data, send in the headers a content type of application/json, and pass in the token for protected routes authorization
         const config = {
             headers: {
                 'Content-Type': 'application/json'

@@ -6,7 +6,7 @@ import { saveShippingAddressAction } from '../../actions/cartActions';
 import CheckoutSteps from '../CheckoutSteps';
 
 const ShippingScreen = ({ history }) => {
-    // First of all, We want to fill out the fields bellow, with data from the local storage (initial state from store), if any data in local storage.
+    // Initially, fill out the fields, with data from the local storage (initial state from store), if any data in local storage.
     const cart = useSelector((state) => state.cart);
     const { shippingAddress } = cart; // destructuring cart, and pulling shippingAddress from it.
 
@@ -19,7 +19,7 @@ const ShippingScreen = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveShippingAddressAction({ address, city, postalCode, country })); // {address: address, city: city, postalCode: postalCode, country: country}
+        dispatch(saveShippingAddressAction({ address, city, postalCode, country })); 
         // continue to the next page, payment:
         history.push('/payment');
     }
